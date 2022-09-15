@@ -7,8 +7,13 @@ conda activate deltalake-tute
 pip install -r requirements.txt
 
 which pyspark
+
 pyspark --help
-pyspark --packages io.delta:delta-core_2.12:2.1.0 --conf "spark.sql.extensions=io.delta.sql.DeltaSparkSessionExtension" --conf "spark.sql.catalog.spark_catalog=org.apache.spark.sql.delta.catalog.DeltaCatalog"
+
+pyspark \
+    --packages io.delta:delta-core_2.12:2.1.0 \
+    --conf "spark.sql.extensions=io.delta.sql.DeltaSparkSessionExtension" \
+    --conf "spark.sql.catalog.spark_catalog=org.apache.spark.sql.delta.catalog.DeltaCatalog"
 ```
 
 
@@ -28,6 +33,8 @@ Spark context available as 'sc' (master = local[*], app id = local-1234567890000
 SparkSession available as 'spark'.
 >>>
 >>> help()
+help> quit
+>>>
 ```
 
 - Observe http://localhost:4040
@@ -35,25 +42,27 @@ SparkSession available as 'spark'.
 
 ## Delta Table
 
-```
-Welcome to
-      ____              __
-     / __/__  ___ _____/ /__
-    _\ \/ _ \/ _ `/ __/  '_/
-   /__ / .__/\_,_/_/ /_/\_\   version 3.3.0
-      /_/
+_... while at PySpark Shell, continue to create "Delta Table" like so:_
 
-Using Python version 3.10.6 (main, Aug 22 2022 20:41:54)
-Spark context Web UI available at http://localhost:4040
-Spark context available as 'sc' (master = local[*], app id = local-1234567890000).
-SparkSession available as 'spark'.
+```
 >>> data = spark.range(0, 5)
+
 >>> data
 DataFrame[id: bigint]
+
+>>> type(data)
+<class 'pyspark.sql.dataframe.DataFrame'>
+
 >>> data.write.format("delta").save("./out/delta-table")
 >>> df = spark.read.format("delta").load("./out/delta-table")
+
 >>> df
 DataFrame[id: bigint]
+
+>>> df.printSchema()
+root
+ |-- id: long (nullable = true)
+
 >>> df.show()
 +---+
 | id|
@@ -66,10 +75,9 @@ DataFrame[id: bigint]
 +---+
 
 >>> data = spark.range(5, 10)
->>> data
-DataFrame[id: bigint]
 >>> data.write.format("delta").mode("overwrite").save("./out/delta-table")
 >>> df = spark.read.format("delta").load("./out/delta-table")
+
 >>> df.show()
 +---+
 | id|
@@ -117,10 +125,12 @@ Reading:
 
 ```
 $ jupyter-lab
+(CTRL + C)
 ```
 
 - Goto http://localhost:8888/lab
-- Open [quickstart.ipynb](quickstart.ipynb)
+- Open [quickstart.ipynb](quickstart.ipynb) in JupyterLab
+- Execute each Notebook cells (_Shift + Enter_) -- one by one to observe
 
 Python API:
 - https://docs.delta.io/latest/api/python/index.html
