@@ -128,17 +128,15 @@ $ jupyter-lab
 (CTRL + C)
 ```
 
-- Goto http://localhost:8888/lab
+- Go to http://localhost:8888/lab
 - Open [quickstart.ipynb](quickstart.ipynb) in JupyterLab
 - Execute each Notebook cells (_Shift + Enter_) -- one by one to observe
 
-Python API:
-- https://docs.delta.io/latest/api/python/index.html
-- https://spark.apache.org/docs/3.1.1/api/python/reference/api/pyspark.sql.DataFrame.html
-
 REF:
 - https://docs.delta.io/latest/quick-start.html
-- https://spark.apache.org/docs/3.1.1/api/python/getting_started/quickstart.html
+- https://docs.delta.io/latest/api/python/index.html
+
+## Notes
 
 ### Storage
 
@@ -151,3 +149,14 @@ $ ls -lh out/delta-table/
 > This quickstart uses local paths for Delta table locations. For configuring HDFS or cloud storage for Delta tables, see Storage configuration.
 
 - https://docs.delta.io/latest/delta-storage.html
+
+### Re-Spin
+
+```
+rm -rf out/delta-table
+rm -rf out/checkpoint
+```
+
+### Related
+
+- https://github.com/victorskl/iceberg-tute
