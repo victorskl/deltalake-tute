@@ -16,3 +16,4 @@ out/table-*/
 out/tbl-*/
 
 .ipynb_checkpoints/
+spark-warehouse/
