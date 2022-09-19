@@ -54,6 +54,7 @@ DataFrame[id: bigint]
 <class 'pyspark.sql.dataframe.DataFrame'>
 
 >>> data.write.format("delta").save("./out/delta-table")
+
 >>> df = spark.read.format("delta").load("./out/delta-table")
 
 >>> df
@@ -75,7 +76,9 @@ root
 +---+
 
 >>> data = spark.range(5, 10)
+
 >>> data.write.format("delta").mode("overwrite").save("./out/delta-table")
+
 >>> df = spark.read.format("delta").load("./out/delta-table")
 
 >>> df.show()
@@ -160,3 +163,4 @@ rm -rf out/checkpoint
 ### Related
 
 - https://github.com/victorskl/iceberg-tute
+- https://github.com/victorskl/hudi-tute
