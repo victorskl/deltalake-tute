@@ -1,7 +1,7 @@
 # Delta Lake tute
 
 ```
-conda create -n deltalake-tute python=3.10
+conda create -n deltalake-tute python=3.12
 conda activate deltalake-tute
 
 pip install -r requirements.txt
@@ -11,7 +11,7 @@ which pyspark
 pyspark --help
 
 pyspark \
-    --packages io.delta:delta-core_2.12:2.1.0 \
+    --packages io.delta:delta-spark_2.12:3.2.0 \
     --conf "spark.sql.extensions=io.delta.sql.DeltaSparkSessionExtension" \
     --conf "spark.sql.catalog.spark_catalog=org.apache.spark.sql.delta.catalog.DeltaCatalog"
 ```
@@ -24,12 +24,12 @@ Welcome to
       ____              __
      / __/__  ___ _____/ /__
     _\ \/ _ \/ _ `/ __/  '_/
-   /__ / .__/\_,_/_/ /_/\_\   version 3.3.0
+   /__ / .__/\_,_/_/ /_/\_\   version 3.5.1
       /_/
 
-Using Python version 3.10.6 (main, Aug 22 2022 20:41:54)
+Using Python version 3.12.4 (main, Jun 18 2024 10:07:17)
 Spark context Web UI available at http://localhost:4040
-Spark context available as 'sc' (master = local[*], app id = local-1234567890000).
+Spark context available as 'sc' (master = local[*], app id = local-1722669259694).
 SparkSession available as 'spark'.
 >>>
 >>> help()
@@ -101,22 +101,27 @@ $ tree out/delta-table
 out/delta-table
 ├── _delta_log
 │   ├── 00000000000000000000.json
-│   └── 00000000000000000001.json
-├── part-00000-b6a5241d-bc57-4f98-b7d2-fae603c0e549-c000.snappy.parquet
-├── part-00000-feaa2c42-bd44-47ae-af67-e4b4b9c678ec-c000.snappy.parquet
-├── part-00001-3f6d78ef-5bbd-4e3b-bb4c-c25479d67b48-c000.snappy.parquet
-├── part-00001-d993842e-8173-4311-8f4e-0f2c8132cf10-c000.snappy.parquet
-├── part-00002-41594f24-a72a-4f8d-bf55-e59143213815-c000.snappy.parquet
-├── part-00002-4f6bfeb1-1f6f-487e-8c4a-aa8cce658741-c000.snappy.parquet
-├── part-00003-019d1f38-d73e-4935-b9a1-2d0840893e11-c000.snappy.parquet
-└── part-00003-be56059f-09e7-4f44-807d-d71d8bc0486b-c000.snappy.parquet
+│   ├── 00000000000000000001.json
+│   └── _commits
+├── part-00000-373afa6b-9ee8-43a3-b8ab-6f449c205cad-c000.snappy.parquet
+├── part-00000-c1f934e0-9854-477a-9faa-5d1e11a53b74-c000.snappy.parquet
+├── part-00002-2968b69f-892e-4d92-b161-3c4e61b95584-c000.snappy.parquet
+├── part-00002-2ebb6904-b9aa-46e7-89af-05902f34f9d4-c000.snappy.parquet
+├── part-00004-adabea16-b5cb-4e7c-9109-bdcc1604ae5b-c000.snappy.parquet
+├── part-00004-e635bc4d-d239-453d-bfa0-c5b771136243-c000.snappy.parquet
+├── part-00007-d0201839-59b4-4ec0-bff4-73e18cec97e5-c000.snappy.parquet
+├── part-00007-d48851b0-8821-4c7f-ac79-9b6632213c04-c000.snappy.parquet
+├── part-00009-5adb3fee-6a4b-401f-adfe-5fbb0b99ab16-c000.snappy.parquet
+├── part-00009-b271b72a-673e-453b-a453-7f50ea4984fc-c000.snappy.parquet
+├── part-00011-42910d45-e150-41a5-8eca-b4337afdb8f6-c000.snappy.parquet
+└── part-00011-a23f82fc-0d84-4557-bf8a-b9fb9076191a-c000.snappy.parquet
 
-1 directory, 10 files
+3 directories, 14 files
 ```
 
 Reading:
 - [Delta Lake: High-Performance ACID Table Storage over Cloud Object Stores](https://www.databricks.com/wp-content/uploads/2020/08/p975-armbrust.pdf)
-- https://github.com/delta-io/delta/blob/v2.1.0/PROTOCOL.md
+- https://github.com/delta-io/delta/blob/v3.2.0/PROTOCOL.md
 
 > Does Delta Lake support multi-table transactions?
 > 
